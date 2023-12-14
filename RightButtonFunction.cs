@@ -8,7 +8,7 @@ using std_msgs = RosSharp.RosBridgeClient.MessageTypes.Std;
 public class RightButtonFunction : MonoBehaviour
 {
     RosSocket rosSocket;
-    public GameObject updateIP;
+    public GameObject RosConnector;
     public GameObject controllerInput; // input
     public bool PUN_flag = false;
 
@@ -21,7 +21,7 @@ public class RightButtonFunction : MonoBehaviour
 
     void Start()
     {
-        RosBridgeServerUrl = updateIP.GetComponent<Update_rosip>().getRosIP();
+        RosBridgeServerUrl = RosConnector.GetComponent<RosConnector>().RosBridgeServerUrl;
         rosSocket = new RosSocket(new RosSharp.RosBridgeClient.Protocols.WebSocketNetProtocol(RosBridgeServerUrl));
         Rightprimary_button = rosSocket.Advertise<std_msgs.Bool>(Topic_name_pub_primary_button);
         Rightscondary_button = rosSocket.Advertise<std_msgs.Bool>(Topic_name_pub_secondary_button);
@@ -29,17 +29,19 @@ public class RightButtonFunction : MonoBehaviour
 
     void Update()
     {
-        if (PUN_flag)
-        {
-            RightprimaryButtonValue = controllerInput.GetComponent<ControllersManager_globle>().getRightPrimaryButton();
-            RightsecondaryButtonValue = controllerInput.GetComponent<ControllersManager_globle>().getRightSecondaryButton();
+        // if (PUN_flag)
+        // {
+        //     RightprimaryButtonValue = controllerInput.GetComponent<ControllersManager_globle>().getRightPrimaryButton();
+        //     RightsecondaryButtonValue = controllerInput.GetComponent<ControllersManager_globle>().getRightSecondaryButton();
 
-        }
-        else
-        {
-            RightprimaryButtonValue = controllerInput.GetComponent<ControllersManager>().getRightPrimaryButton();
-            RightsecondaryButtonValue = controllerInput.GetComponent<ControllersManager>().getRightSecondaryButton();
-        }
+        // }
+        // else
+        // {
+        //     RightprimaryButtonValue = controllerInput.GetComponent<ControllersManager>().getRightPrimaryButton();
+        //     RightsecondaryButtonValue = controllerInput.GetComponent<ControllersManager>().getRightSecondaryButton();
+        // }
+        RightprimaryButtonValue = controllerInput.GetComponent<ControllersManager>().getRightPrimaryButton();
+        RightsecondaryButtonValue = controllerInput.GetComponent<ControllersManager>().getRightSecondaryButton();
 
         //------------------Pub_Primary Buttom------------------------------//
         std_msgs.Bool message_p = new std_msgs.Bool

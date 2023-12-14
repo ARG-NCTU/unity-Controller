@@ -13,6 +13,7 @@ public class ControllersManager : MonoBehaviour
     private float triggerRightValue, triggerLeftValue;
     private bool RightprimaryButtonValue, RightsecondaryButtonValue, LeftprimaryButtonValue, LeftsecondaryButtonValue;
     private Vector2 Rightprimary2DAxisValue, Leftprimary2DAxisValue;
+    private Vector2 leftJoy, rightJoy;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,17 @@ public class ControllersManager : MonoBehaviour
         rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 Rightprimary2DAxisValue);
         return Rightprimary2DAxisValue;
     }
+        public Vector2 getRightjoy() //for offline use
+    {
+        rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joyRightValue);
+        return joyRightValue;
+    }
+
+    public Vector2 getRightjoyVal() //for online use get from RPC
+    {
+        return rightJoy;
+    }
+
 
 
     //-------LEFT CONTROLLER------------//
@@ -102,6 +114,16 @@ public class ControllersManager : MonoBehaviour
     {
         leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 Leftprimary2DAxisValue);
         return Leftprimary2DAxisValue;
+    }
+        public Vector2 getLeftjoy() //for offline use
+    {
+        rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joyRightValue);
+        return joyRightValue;
+    }
+
+    public Vector2 getLeftjoyVal() //for online use get from RPC
+    {
+        return rightJoy;
     }
 
 }

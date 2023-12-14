@@ -9,12 +9,12 @@ public class RightGripFunction : MonoBehaviour
     public GameObject controllerInput; // input
     public GameObject ConnectorOutput; // output
 
-    public bool PUN_flag = false;
+    // public bool PUN_flag = false;
 
     //visual aids -- end-effector trajector
-    public Material lineMaterial;
-    public float startWidth = 0.05f, endWidth = 0.05f;
-    public float destroyTimer = 4f;
+    // public Material lineMaterial;
+    // public float startWidth = 0.05f, endWidth = 0.05f;
+    // public float destroyTimer = 4f;
 
     private List<GameObject> lines = new List<GameObject>(); //lists of lines
     private LineRenderer newLine;
@@ -29,14 +29,15 @@ public class RightGripFunction : MonoBehaviour
 
     void Update()
     {
-        if (PUN_flag)
-        {
-            rightgripValue = controllerInput.GetComponent<ControllersManager_globle>().getRightGrip();
-        }
-        else
-        {
-            rightgripValue = controllerInput.GetComponent<ControllersManager>().getRightGrip();
-        }
+        // if (PUN_flag)
+        // {
+        //     rightgripValue = controllerInput.GetComponent<ControllersManager_globle>().getRightGrip();
+        // }
+        // else
+        // {
+        //     rightgripValue = controllerInput.GetComponent<ControllersManager>().getRightGrip();
+        // }
+        rightgripValue = controllerInput.GetComponent<ControllersManager>().getRightGrip();
 
         trajectoryMode(rightgripValue);
 

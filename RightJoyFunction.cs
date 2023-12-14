@@ -7,9 +7,9 @@ using geo_msgs = RosSharp.RosBridgeClient.MessageTypes.Geometry;
 public class RightJoyFunction : MonoBehaviour
 {
     RosSocket rosSocket;
-    public GameObject updateIP;
+    public GameObject RosConnector;
     public GameObject controllerInput;
-    public bool PUN_flag = false;
+    // public bool PUN_flag = false;
 
     public string Topic_name_pub; //topic name
     private string RosBridgeServerUrl; //IP address
@@ -26,7 +26,7 @@ public class RightJoyFunction : MonoBehaviour
 
     void Start()
     {
-        RosBridgeServerUrl = updateIP.GetComponent<Update_rosip>().getRosIP();
+        RosBridgeServerUrl = RosConnector.GetComponent<RosConnector>().RosBridgeServerUrl;
 
         rosSocket = new RosSocket(new RosSharp.RosBridgeClient.Protocols.WebSocketNetProtocol(RosBridgeServerUrl));
         twist_target = rosSocket.Advertise<geo_msgs.TwistStamped>(Topic_name_pub);
@@ -35,14 +35,15 @@ public class RightJoyFunction : MonoBehaviour
 
     void Update()
     {
-        if (PUN_flag)
-        {
-            Primary2DAxis = controllerInput.GetComponent<ControllersManager_globle>().getRightPrimary2DAxis();
-        }
-        else
-        {
-            Primary2DAxis = controllerInput.GetComponent<ControllersManager>().getRightPrimary2DAxis();
-        }
+        // if (PUN_flag)
+        // {
+        //     Primary2DAxis = controllerInput.GetComponent<ControllersManager_globle>().getRightPrimary2DAxis();
+        // }
+        // else
+        // {
+        //     Primary2DAxis = controllerInput.GetComponent<ControllersManager>().getRightPrimary2DAxis();
+        // }
+        Primary2DAxis = controllerInput.GetComponent<ControllersManager>().getRightPrimary2DAxis();
         
 
         linear_speed = Primary2DAxis.y;
